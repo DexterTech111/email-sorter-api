@@ -2,14 +2,18 @@
   "name": "chameleon",
   "version": "1.0.0",
   "main": "server.js",
+  "engines": {
+    "node": "22.14.0",
+    "npm": "10.9.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
+  "keywords": ["email", "provider", "detection", "api"],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Email provider detection API service",
   "dependencies": {
     "express": "^5.1.0"
   }
