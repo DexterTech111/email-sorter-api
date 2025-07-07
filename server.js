@@ -429,7 +429,7 @@ app.get('/health', (req, res) => {
 
 // Start server
 //app.listen(port, () => {
-  app.listen(port,'0.0.0.0', () => {
+ app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
   console.log(`Email provider detection server running on http://localhost:${port}`);
   console.log(`CORS enabled for all origins`);
   console.log(`Usage Options:`);
