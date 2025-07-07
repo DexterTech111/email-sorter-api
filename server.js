@@ -300,25 +300,22 @@ function getDomainFromEmail(email) {
 
 // Function to identify provider by MX records
 async function identifyByMX(domain) {
-  try {
-    const mxRecords = await dns.resolveMx(domain);
-    if (mxRecords && mxRecords.length > 0) {
-      const mxDomain = mxRecords[0].exchange.toLowerCase();
-      
-      // Check MX patterns
-      for (const [pattern, provider] of Object.entries(mxPatterns)) {
-        if (mxDomain.includes(pattern)) {
-          return provider;
+    try {
+        const mxRecords = await dns.resolveMx(domain);
+        if (mxRecords && mxRecords.length > 0) {
+            const mxDomain = mxRecords[0].exchange.toLowerCase();
+            for (const [pattern, provider] of Object.entries(mxPatterns)) {
+                if (mxDomain.includes(pattern)) {
+                    return provider;
+                }
+            }
+            return `Custom Email Server (MX: ${mxDomain})`;
         }
-      }
-      
-      // If no pattern matches, return the MX server info
-      return `Custom Email Server (MX: ${mxDomain})`;
+    } catch (error) {
+        console.log(`MX lookup failed for ${domain}:`, error.message);
+        return null; // Return null instead of throwing
     }
-  } catch (error) {
-    console.log(`MX lookup failed for ${domain}:`, error.message);
-  }
-  return null;
+    return null;
 }
 
 // Function to check if domain uses common email services
